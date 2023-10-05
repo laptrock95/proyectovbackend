@@ -1,0 +1,41 @@
+sails generate api Eventos nombre:string
+sails generate model Funciones lugar:string hora:string
+sails generate model Usuario nombre:string password:string rol:string 
+ sails generate controller inicio
+sails generate page inicio
+
+
+<h1>lista de eventos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>lugar</th>
+      <th>hora</th>
+      <th>evento</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <% funcion.forEach(funciones=> { %>
+      <tr>
+        <td><%=funciones.lugar%></td>
+        <td><%=funciones.hora%></td>
+      
+        <td><%=funciones.eventos.nombre%></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+
+
+fn: async function (inputs,exits) {
+    const funcion = await Funciones.find().populate('eventos');
+    return exits.success({funcion});
+  }*/
+
+
+
+
+ 

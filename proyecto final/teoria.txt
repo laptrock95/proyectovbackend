@@ -1,0 +1,20 @@
+para elk boton que abra una ventan emergente se debe poner el oboto con un funcion 
+           <button  onclick="abrirVentanaEmergente('<%= funciones.id %>')">
+que coge el id de la funcion
+luego en asees/js se crea un archivo custom.js con el siguiente codigo
+
+function abrirVentanaEmergente(id_funcion) {
+
+  var ventanaEmergente = window.open('/ventana-emergentes/' + id_funcion, 'nombreVentanaEmergente', 'width=500,height=500');
+}
+
+Este código define una función llamada abrirVentanaEmergente que recibe un argumento id_funcion. La función utiliza el método window.open 
+para abrir una ventana emergente en el navegador, pasando la ruta /ventana-emergentes/ concatenada con el id_funcion como argumento.
+ El segundo argumento nombreVentanaEmergente es el nombre que se le da a la ventana emergente 
+y el tercer argumento establece el tamaño de la ventana en píxeles. En este caso, se establece un ancho 
+y alto de 500 píxeles para la ventana emergente.
+
+Este código podría ser utilizado en una página web para abrir una ventana emergente que muestre 
+información adicional sobre una función específica en un evento, por ejemplo.
+
+la ruta /ventana-emergentes/ debe estar configurada 'GET /ventana-emergentes/:id_funcion': { action: 'emergente' },

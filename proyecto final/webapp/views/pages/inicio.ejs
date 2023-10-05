@@ -1,0 +1,44 @@
+<%- partial('../partials/header') %>
+<a href="/login">admin</a>
+
+<script src="/js/custom.js"></script>
+
+
+<div class="funciones-container">
+<h2>Funciones 3ra ersionn</h2>
+<% var eventosImprimidos = []; %>
+<% for (var i = 0; i < funciones.length; i++) { %>
+  <% var funcion = funciones[i]; %>
+  <% if (eventosImprimidos.indexOf(funcion.eventos2023.id) === -1) { %>
+    <% eventosImprimidos.push(funcion.eventos2023.id); %>
+  <div class="evento">  
+     <h1> <%= funcion.eventos2023.nombre %> </h1>
+     <img class="terminator" src="/images/<%= funcion.eventos2023.nombre %>.jpg" alt="">
+      
+     <% for (var j = 0; j < funciones.length; j++) { %>
+        <% var funcion2 = funciones[j]; %>
+        <% if (funcion2.eventos2023.id === funcion.eventos2023.id) { %>
+          <div class="funciones">
+            Hora <%= funcion2.hora %>          
+              <% salas.forEach(function(sala) { %>
+                <% if (sala.id === funcion2.salas.id) { %>                 
+                    Sala <%= sala.num_sala %>                    
+                     <button onclick="mostrarMensaje('<%= funcion.eventos2023.id %>', '<%= funcion2.id %>', '<%= funcion2.asientos_disp %>','<%= sala.num_sala %>')">
+                      Lugar: <%= sala.lugar.nombre %>
+                      Asientos disponibles: <%= funcion2.asientos_disp %>                      
+                      </button>        
+                  
+                <% } %>
+              <% }) %>          
+          <% } %>
+        </div>
+      <% } %>
+  </div>
+  
+  <% } %>
+<% } %>
+
+</div>
+
+
+

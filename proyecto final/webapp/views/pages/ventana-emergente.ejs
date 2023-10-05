@@ -1,0 +1,33 @@
+<div>
+  <h1><%= evento.nombre %></h1>
+</div>
+
+<div>
+  <h2>Información de la función:</h2>
+  <p>Lugar: <%= funcion.lugar %></p>
+  <p>Hora: <%= funcion.hora %></p>
+  <% if (funcion.asientos_disp > 0) { %>
+    <p>Asientos disponibles:</p>
+    
+    <form method="POST" action="/reservar?funcion_id=<%=funcion.id%>&asientos=0" id="reservar-form" onsubmit="actualizarAction()">
+      <input type="hidden" name="funcion_id" value="<%= funcion.id %>">
+      <select id="asientos-select" name="asientos">
+        <% for (let i = 1; i <= funcion.asientos_disp; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select>
+      <button type="submit">Reservar</button>
+    </form>
+  
+  <% } else { %>
+    <p>No hay asientos disponibles.</p>
+  <% } %>
+</div>
+
+<script>
+  function actualizarAction() {
+    const asientos = document.getElementById("asientos-select").value;
+    const form = document.getElementById("reservar-form");
+    form.action = `/reservar?funcion_id=<%=funcion.id%>&asientos=${asientos}`;
+  }
+</script>

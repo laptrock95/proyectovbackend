@@ -1,0 +1,42 @@
+<!-- Vista de reservar (reservar.ejs) -->
+<div><h1>Reservar</h1></div>
+
+<% if (typeof mensaje !== 'undefined') { %>
+
+  <div class="mensaje-animado"><p><%= mensaje %></p></div>
+
+  <div id="reservar-otro-container">
+    <a href="/">Reservar otro</a>
+  </div>
+
+<% } else { %>
+
+  <div id="reserva-container">
+    <form action="/procesar" method="post">
+      <label for="nombre">telefono:</label>
+      <input type="text" name="telefono"  required>
+      <span class="error">Por favor ingrese un nombre válido (solo letras y espacios en blanco)</span>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <% /* Tomamos los valores de evento, función y asientos del URL */ %>
+      <% const evento = req.query.evento %>
+      <% const funcion = req.query.funcion %>
+      <% const asientos = req.query.asientos %>
+      <% const sala = req.query.sala %>
+
+
+      <% /* Los enviamos en inputs hidden */ %>
+      <input type="hidden" name="evento" value="<%= evento %>">
+      <input type="hidden" name="funcion" value="<%= funcion %>">
+      <input type="hidden" name="asientos" value="<%= asientos %>">
+      <input type="hidden" name="sala" value="<%= sala %>">
+      
+
+
+      <input type="submit" value="Reservar">
+    </form>
+  </div>
+
+<% } %>
+<script src="/js/custom2.js"></script>

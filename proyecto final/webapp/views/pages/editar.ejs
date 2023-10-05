@@ -1,0 +1,26 @@
+
+<h1>hola a desde editar</h1>
+<form action="/actualizar-evento" method="post">
+
+  <label>Nombre:</label>
+  <input type="text" name="nombre" value="<%= evento.nombre %>">
+
+
+
+  <% /* Los enviamos en inputs hidden */ %>
+  <input type="hidden" name="id" value="<%= evento.id %>">
+
+  <input type="submit" value="editar">
+
+
+</form>
+  <form action="/subir" method="post" enctype="multipart/form-data">
+    <input type="file" name="imagen" accept="image/*">
+    <input type="submit" value="subir">
+  </form> 
+
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
+  <script src="/js/custom4.js"></script>

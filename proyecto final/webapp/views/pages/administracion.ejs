@@ -1,0 +1,87 @@
+
+
+<a href="/logout">cerrar sesion</a>
+
+<div class="funciones-editar">
+  <% var eventosImprimidos = []; %>
+  <% for (var i = 0; i < funciones.length; i++) { %>
+    <% var funcion = funciones[i]; %>
+    <% if (eventosImprimidos.indexOf(funcion.eventos2023.id) === -1) { %>
+      <% eventosImprimidos.push(funcion.eventos2023.id); %>
+      <div class="evento">  
+        <div class="botones">
+          <button id="eliminar-btn" onclick="confirmarEliminacion('<%= funcion.eventos2023.id %>')">Eliminar evento</button>  
+          <button onclick="editarEvento('<%= funcion.eventos2023.id %>','<%= funcion.id %>')">Editar evento</button>
+        
+        </div>
+        <h1> <%= funcion.eventos2023.nombre.toUpperCase() %> </h1>
+  
+    
+        <% var hayReservas = false; %>
+        <table>
+          <tr>
+            <th>Num de Cliente</th>
+            
+            <th>Teléfono</th>
+            <th>Correo</th>
+            <th>Número de asientos reservados</th>
+            <th>Número de sala</th>
+            <th>Hora de la función</th>
+            <th>Sillas designadas</th>
+            
+           
+          </tr>
+      
+          <% for (var j = 0; j < funciones.length; j++) { %>
+            <% var funcion2 = funciones[j]; %>
+            <% if (funcion2.eventos2023.id === funcion.eventos2023.id) { %>
+              <div class="invitados">
+                <% // Initialize the total number of reserved seats to 0 %>
+                <% var totalAsientos = 0; %>
+                <% var clienteCounter = 1; %>
+                <% invitados.forEach(function(invitado) { %>
+                 
+                  <% if (invitado.funcion.id === funcion2.id) { %>                 
+                    <tr>
+                      <td><%= clienteCounter %></td>
+                      
+                      <td><%= invitado.telefono %></td>
+                      <td><%= invitado.correo %></td>
+                      <td><%= invitado.asientos %></td>
+                      <td><%= invitado.sala.num_sala %></td>
+                      <td><%= invitado.funcion.hora %></td>
+                      
+                      <td>
+                        <% for (var i = 1; i <= invitado.asientos; i++) { %>
+                          Sillas designadas <%= totalAsientos + i %> <br>
+                        <% } %>
+                        <% totalAsientos += invitado.asientos;%>
+                       
+                      </td>
+                      <td>
+                         <button onclick="eliminarFuncion('<%= invitado.id %>','<%=funcion2.id%>')">Eliminiar Funcion</button>
+                      </td>
+                    </tr>
+                    <% hayReservas = true; %>
+                    <% clienteCounter++; %>
+                  <% } %>
+                <% }) %>
+              </div>
+            <% } %>
+          <% } %>
+          <% if (!hayReservas) { %>
+            <tr>
+              <td colspan="8">No hay reservas</td>
+            </tr>
+            
+          <% } %>
+          
+        </table>
+      
+      </div>
+    
+    <% } %>
+  <% } %>
+  <a href="/crear-evento">Crear evento</a>
+</div>
+<script src="/js/custom5.js"></script>
