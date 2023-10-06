@@ -13,9 +13,11 @@ node {
      }
    }
    stage('Docker Build & Push') {
-     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
-      def nuestraapp = docker.build("laptrock/backendnodejs:${gitcommit}", "proyecto final/webapp")
-      nuestraapp.push()
+     dir('proyecto final/webapp') {
+       docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+         def nuestraapp = docker.build("laptrock/backendnodejs:${gitcommit}", ".")
+         nuestraapp.push()
+       }
      }
    }
 }
