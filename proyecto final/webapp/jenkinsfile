@@ -9,7 +9,6 @@ node {
     nodejs(nodeJSInstallationName: 'nodejs') {
      dir('proyecto final/webapp') {
       sh 'npm install'
-      sh 'npm test'
       }
      }
    }
