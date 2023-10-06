@@ -6,9 +6,11 @@ node {
      gitcommit = readFile('.git/commit-id').trim()
    }
    stage('test') {
-     nodejs(nodeJSInstallationName: 'nodejs') {
-       sh 'npm install'
-       sh 'npm test'
+    nodejs(nodeJSInstallationName: 'nodejs') {
+     dir('proyecto final/webapp') {
+      sh 'npm install'
+      sh 'npm test'
+      }
      }
    }
    stage('Docker Build & Push') {
